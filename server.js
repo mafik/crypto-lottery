@@ -3,7 +3,7 @@ var app = require('http').createServer(handler)
   , fs = require('fs');
 
 var nodemailer = require("nodemailer");
-var transport = nodemailer.createTransport("sendmail");
+var transport = nodemailer.createTransport("sendmail", {path: '/usr/sbin/sendmail'});
 
 app.listen(8080);
 
@@ -70,6 +70,7 @@ io.sockets.on('connection', function (socket) {
       socket.disconnect();
       return;
     }
+    room = room.substr(1);
     var url = "https://mrogalski.eu/cl/#" + room;
     transport.sendMail({
       from: "Crypto Lottery <marek@mrogalski.eu>",
