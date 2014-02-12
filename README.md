@@ -41,3 +41,5 @@ Here are some tips if you decide to implement Crypto Lottery yourself:
 **Add salt when hashing** - this way you will avoid memorization attacks (very easy to perform if there are few options to choose from).
 
 **Combine numbers using XOR or modulo addition** - this way one honest participant is enough to guarantee random results (perpertators can't cooperate to cheat him). If everyone cheats - they probably don't want to use Crypto Lottery.
+
+Also feel free to use code from this site but remember that it was released under *GNU Affero* with a few parts under various other licenses.
