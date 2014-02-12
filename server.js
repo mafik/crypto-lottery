@@ -2,10 +2,26 @@ var app = require('http').createServer(handler)
   , io = require('socket.io').listen(app)
   , fs = require('fs');
 
+io.enable('browser client minification');  // send minified client
+io.enable('browser client etag');          // apply etag caching logic based on version number
+io.enable('browser client gzip');          // gzip the file
+ io.set('log level', 1);                    // reduce logging
+
+// enable all transports (optional if you want flashsocket support, please note that some hosting
+// providers do not allow you to create servers that listen on a port different than 80 or their
+// default port)
+io.set('transports', [
+    'websocket'
+  , 'flashsocket'
+  , 'htmlfile'
+  , 'xhr-polling'
+  , 'jsonp-polling'
+]);
+
 var nodemailer = require("nodemailer");
 var transport = nodemailer.createTransport("sendmail", {path: '/usr/sbin/sendmail'});
 
-app.listen(8080);
+app.listen(10770);
 
 function validateEmail(email) { 
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
