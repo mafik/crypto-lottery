@@ -388,6 +388,15 @@ p.SHA3=r._createHelper(d);p.HmacSHA3=r._createHmacHelper(d)})(Math);
      socket.emit('invite', emailInput.value);
    }
 
+   document.getElementById('email').onkeypress = function(e){
+     if (!e) e = window.event;
+     var keyCode = e.keyCode || e.which;
+     if (keyCode == '13'){
+       invite();
+       return false;
+     }
+   }
+
    socket.on('invalid-email', function() {
      document.getElementById('email').classList.add('animated');
      document.getElementById('email').classList.add('shake');
